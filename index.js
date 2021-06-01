@@ -1,5 +1,8 @@
 import express from 'express';
+import ERUSBot from './src/bot.js';
+
 const server = express();
+const Bot = new ERUSBot('!');
 
 server.all('/', (req, res) => {
   res.send('Bot running');
@@ -10,10 +13,6 @@ export function keepAlive() {
     console.log('Server is alive.')
   });
 }
-export function keepAlive() {
-  server.listen(3000, () => {
-    console.log('Server is alive.')
-  });
-}
+
 
 keepAlive();
