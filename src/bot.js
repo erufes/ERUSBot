@@ -14,7 +14,7 @@ class ERUSBot {
   }
 
   setCommandChar(commandChar) {
-    //this._commandChar = commandChar;
+    this._commandChar = commandChar;
     const devChannel = this._client.channels.cache.get(devChannelId);
     devChannel.send(`Updated commandChar to ${commandChar}`);
   }
@@ -33,7 +33,6 @@ class ERUSBot {
 
   _setupListeners() {
     awakenListener(this._client);
-    //helloListener(this.client, this.commandChar);
     messageListener(this);
 
   }

@@ -8,12 +8,15 @@ const getCommandFromMessage = (message) => message.content.split(' ')[0].substri
 
 const isMessageCommand = (ERUSBot, message) => message.content[0] === ERUSBot.getCommandChar();
 
+const getArgumentsFromMessage = (message) => message.content.split(' ').slice(1);
+
 const setupCommandListeners = (ERUSBot, message) => {
   if(isMessageCommand(ERUSBot, message)) {
       const command = getCommandFromMessage(message);
+      const args = getArgumentsFromMessage(message);
       switch(command) {
         case commandList.changeCommandChar:
-          changeCommandChar(ERUSBot, 'TODO');
+          changeCommandChar(ERUSBot, args);
           break;
         case commandList.help:
           help(message);
