@@ -7,6 +7,7 @@
   "author": "pietroluongo",
   "license": "MIT",
   "dependencies": {
+    "@replit/database": "^2.0.1",
     "discord.js": "^12.5.3",
     "express": "^4.17.1",
     "typescript": "^4.3.2"

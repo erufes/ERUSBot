@@ -1,5 +1,4 @@
 import Discord from 'discord.js'
-import helloListener from './listeners/hello.js';
 import awakenListener from './listeners/awaken.js';
 import messageListener from './listeners/message.js';
 

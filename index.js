@@ -14,4 +14,4 @@ export function keepAlive() {
 }
 keepAlive();
 
-const Bot = new ERUSBot('!');
+const Bot = new ERUSBot('$');

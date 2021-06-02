@@ -1,6 +1,7 @@
 import commandList from '../commandList.js';
 import responseList from '../responseList.js';
 import changeCommandChar from '../commands/changeCommandChar.js';
+import help from '../commands/help.js';
 
 
 const getCommandFromMessage = (message) => message.content.split(' ')[0].substring(1);
@@ -13,6 +14,9 @@ const setupCommandListeners = (ERUSBot, message) => {
       switch(command) {
         case commandList.changeCommandChar:
           changeCommandChar(ERUSBot, 'TODO');
+          break;
+        case commandList.help:
+          help(message);
           break;
         default:
           break;
