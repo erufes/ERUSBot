@@ -2,5 +2,6 @@ export default {
   changeCommandChar: 'setComando',
   presenceList: 'chamada',
   addUser: 'addUser',
-  help: 'help'
+  help: 'help',
+  listUsers: 'membros'
 }

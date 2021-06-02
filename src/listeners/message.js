@@ -2,7 +2,8 @@ import commandList from '../commandList.js';
 import responseList from '../responseList.js';
 import changeCommandChar from '../commands/changeCommandChar.js';
 import help from '../commands/help.js';
-
+import addUser from '../commands/addUser.js';
+import listUsers from '../commands/listUsers.js';
 
 const getCommandFromMessage = (message) => message.content.split(' ')[0].substring(1);
 
@@ -21,6 +22,10 @@ const setupCommandListeners = (ERUSBot, message) => {
         case commandList.help:
           help(message);
           break;
+        case commandList.addUser:
+          addUser(message);
+        case commandList.listUsers:
+          listUsers();
         default:
           break;
     }
