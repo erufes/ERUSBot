@@ -43,6 +43,10 @@ class ERUSBot {
     messageListener(this);
   }
 
+  getLogger() {
+    return this._logger;
+  }
+
 
 }
 

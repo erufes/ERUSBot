@@ -6,22 +6,30 @@ class Logger {
     this._channel = this._client.channels.cache.get(logChannelId);
   }
 
+  _getCurrentDate() {
+    const now = new Date();
+    now.setHours(now.getHours() - 3);
+    const day = now.toLocaleDateString();
+    const time = now.toLocaleTimeString();
+    return `${day} ${time}`;
+  }
+
   logError(msg) {
     this._channel.send(`\`\`\`diff
-- [ERROR]: ${msg}\`\`\``);
+- [ERROR] ${this._getCurrentDate()} ${msg}\`\`\``);
   }
 
   log(msg) {
     this._channel.send(`
     \`\`\`
-- [LOG] ${msg}\`\`\`
+- [LOG]   ${this._getCurrentDate()} ${msg}\`\`\`
     `);
   }
 
   logWarning(msg) {
     this._channel.send(`
     \`\`\`fix
-- [WARNING]: ${msg}\`\`\`
+- [WARN]  ${this._getCurrentDate()} ${msg}\`\`\`
     `);
   }
 

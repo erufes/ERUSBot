@@ -3,5 +3,6 @@ export default {
   presenceList: 'chamada',
   addUser: 'addUser',
   help: 'help',
-  listUsers: 'membros'
+  listUsers: 'membros',
+  purge: 'purge'
 }

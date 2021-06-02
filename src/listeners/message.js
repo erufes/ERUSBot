@@ -4,6 +4,7 @@ import changeCommandChar from '../commands/changeCommandChar.js';
 import help from '../commands/help.js';
 import addUser from '../commands/addUser.js';
 import listUsers from '../commands/listUsers.js';
+import purgeLog from '../commands/purgeLog.js';
 
 const getCommandFromMessage = (message) => message.content.split(' ')[0].substring(1);
 
@@ -26,6 +27,8 @@ const setupCommandListeners = (ERUSBot, message) => {
           addUser(message);
         case commandList.listUsers:
           listUsers();
+        case commandList.purge:
+          purgeLog(ERUSBot, message);
         default:
           break;
     }
