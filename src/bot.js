@@ -1,29 +1,42 @@
 import Discord from 'discord.js'
+import helloListener from './listeners/hello.js';
+import awakenListener from './listeners/awaken.js';
+import messageListener from './listeners/message.js';
+
+const devChannelId = process.env['DEV_CHANNEL']
 
 class ERUSBot {
   constructor(commandChar) {
-    this.client = new Discord.Client();
-    this.commandChar = commandChar;
-    this.token = process.env['TOKEN'];
-    this.initClient();
+    this._client = new Discord.Client();
+    this._commandChar = commandChar;
+    this._token = process.env['TOKEN'];
+    this._initClient();
+    this._setupListeners();
   }
 
   setCommandChar(commandChar) {
-    this.commandChar = commandChar;
+    //this._commandChar = commandChar;
+    const devChannel = this._client.channels.cache.get(devChannelId);
+    devChannel.send(`Updated commandChar to ${commandChar}`);
   }
 
-  initClient() {
-    this.client.login(this.token);
-    this.client.on('ready', () => {
-      console.log(`ERUSBot logged in as ${this.client.user.tag}`);
-    })
-    this.client.on('message', message => {
-      console.log(message.content);
-      console.log(message.content[0]);
-      if(message.content[0] === this.commandChar) {
-        message.reply('read!');
-      }
-    })
+  getCommandChar(commandChar) {
+    return this._commandChar;
+  }
+
+  getClient() {
+    return this._client;
+  }
+
+  _initClient() {
+    this._client.login(this._token);
+  }
+
+  _setupListeners() {
+    awakenListener(this._client);
+    //helloListener(this.client, this.commandChar);
+    messageListener(this);
+
   }
 
 }
