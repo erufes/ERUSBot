@@ -19,7 +19,6 @@ const userIsAdmin = (userId) => {
   return adminIds.includes(userId);
 }
 
-
 const setupCommandListeners = (ERUSBot, message) => {
   if(isMessageCommand(ERUSBot, message)) {
       const command = getCommandFromMessage(message);
@@ -33,13 +32,16 @@ const setupCommandListeners = (ERUSBot, message) => {
           help(message);
           break;
         case commandList.addUser:
-          addUser(message);
+          addUser(ERUSBot, message);
+          break;
         case commandList.listUsers:
-          listUsers();
+          listUsers(ERUSBot, message);
+          break;
         case commandList.purge:
           if(userIsAdmin(id)) {
             purgeLog(ERUSBot, message);
           }
+          break;
         default:
           break;
     }

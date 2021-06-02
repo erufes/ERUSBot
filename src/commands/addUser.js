@@ -21,7 +21,7 @@ const tooManyUsersMessage =
 Há mais de um usuário mencionado na mensagem. Para adicionar um usuário, apenas um único usuário deve ser mencionado.
 `
 
-export default (message) => {
+export default (ERUSBot, message) => {
   const teams = Teams.filter(t => message.content.includes(t));
   const users = message.mentions.users.keys();
   if(users.length === 0) {
@@ -37,5 +37,11 @@ export default (message) => {
     return;
   }
   const user = users.next().value;
-  db.set(user, teams).then(() => {});
+  ERUSBot.getLogger().log(`
+  Attempting to add following data to DB:
+  {
+    user: ${user},
+    teams: ${teams}
+  }`);
+  db.set(user, teams).then((res) => {console.log(res)});
 }
