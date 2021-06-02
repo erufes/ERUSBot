@@ -5,6 +5,7 @@ import help from '../commands/help.js';
 import addUser from '../commands/addUser.js';
 import listUsers from '../commands/listUsers.js';
 import purgeLog from '../commands/purgeLog.js';
+import { getMessageOwner } from '../utils.js';
 
 const getCommandFromMessage = (message) => message.content.split(' ')[0].substring(1);
 
@@ -12,10 +13,18 @@ const isMessageCommand = (ERUSBot, message) => message.content[0] === ERUSBot.ge
 
 const getArgumentsFromMessage = (message) => message.content.split(' ').slice(1);
 
+const adminIds = JSON.parse(`[${process.env['ADMIN_IDS']}]`);
+
+const userIsAdmin = (userId) => {
+  return adminIds.includes(userId);
+}
+
+
 const setupCommandListeners = (ERUSBot, message) => {
   if(isMessageCommand(ERUSBot, message)) {
       const command = getCommandFromMessage(message);
       const args = getArgumentsFromMessage(message);
+      const { username, id } = getMessageOwner(message);
       switch(command) {
         case commandList.changeCommandChar:
           changeCommandChar(ERUSBot, args);
@@ -28,7 +37,9 @@ const setupCommandListeners = (ERUSBot, message) => {
         case commandList.listUsers:
           listUsers();
         case commandList.purge:
-          purgeLog(ERUSBot, message);
+          if(userIsAdmin(id)) {
+            purgeLog(ERUSBot, message);
+          }
         default:
           break;
     }
