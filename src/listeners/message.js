@@ -15,6 +15,8 @@ const getArgumentsFromMessage = (message) => message.content.split(' ').slice(1)
 
 const adminIds = JSON.parse(`[${process.env['ADMIN_IDS']}]`);
 
+const selfId = process.env['SELF_ID'];
+
 const userIsAdmin = (userId) => {
   return adminIds.includes(userId);
 }
@@ -23,7 +25,10 @@ const setupCommandListeners = (ERUSBot, message) => {
   if(isMessageCommand(ERUSBot, message)) {
       const command = getCommandFromMessage(message);
       const args = getArgumentsFromMessage(message);
-      const { username, id } = getMessageOwner(message);
+      const { username, userId } = getMessageOwner(message);
+      if(userId === selfId) {
+        return;
+      }
       switch(command) {
         case commandList.changeCommandChar:
           changeCommandChar(ERUSBot, args);
@@ -32,7 +37,9 @@ const setupCommandListeners = (ERUSBot, message) => {
           help(message);
           break;
         case commandList.addUser:
-          addUser(ERUSBot, message);
+          if(userIsAdmin(id)) {
+            addUser(ERUSBot, message);
+          }
           break;
         case commandList.listUsers:
           listUsers(ERUSBot, message);
@@ -49,6 +56,10 @@ const setupCommandListeners = (ERUSBot, message) => {
 }
 
 const setupResponseListeners = (ERUSBot, message) => {
+  const { username, userId } = getMessageOwner(message);
+  if(userId === selfId) {
+    return;
+  }
   responseList.map(response => {
     response.triggers.map(trigger => {
       if(message.content.includes(trigger)) {

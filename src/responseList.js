@@ -1,5 +1,5 @@
 import goodDay from './responses/goodDay.js';
 
 export default [
-  { action: goodDay, triggers: ['bom dia', 'bodia'] },
+  { action: goodDay, triggers: ['bom dia', 'bodia', 'bo dia', 'Bom dia'] },
 ]
