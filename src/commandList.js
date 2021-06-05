@@ -4,5 +4,6 @@ export default {
   addUser: 'addUser',
   help: 'help',
   listUsers: 'membros',
-  purge: 'purge'
+  purge: 'purge',
+  banMayke: 'ban'
 }

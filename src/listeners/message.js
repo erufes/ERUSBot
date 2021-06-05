@@ -5,6 +5,7 @@ import help from '../commands/help.js';
 import addUser from '../commands/addUser.js';
 import listUsers from '../commands/listUsers.js';
 import purgeLog from '../commands/purgeLog.js';
+import getPresenceList from '../commands/getPresenceList.js';
 import { getMessageOwner } from '../utils.js';
 
 const getCommandFromMessage = (message) => message.content.split(' ')[0].substring(1);
@@ -48,6 +49,9 @@ const setupCommandListeners = (ERUSBot, message) => {
           if(userIsAdmin(id)) {
             purgeLog(ERUSBot, message);
           }
+          break;
+        case commandList.presenceList:
+          getPresenceList(ERUSBot, message);
           break;
         default:
           break;

@@ -11,7 +11,6 @@ export default (ERUSBot, messageData) => {
     res.map(msg => {
       msg.delete();
     })
-    ERUSBot.getLogger().log(`Purged log channel, as requested by ${username}`);
-    
+      ERUSBot.getLogger().log(`Purged log channel, as requested by ${username}`);
   });
 }
